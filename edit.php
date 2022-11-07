@@ -4,16 +4,18 @@ require_once('config.php');
 
 if($_POST){
     if(!empty($_POST['title']) && !empty($_POST['author_id'])){
+
     $id = strip_tags($_POST['id']);
     $title = strip_tags($_POST['title']);
-    $authors = strip_tags($_POST['author_id']);
+    $authorsid = strip_tags($_POST['author_id']);
     $descr = strip_tags($_POST['descr']);
 
-    $sql= 'UPDATE `book` SET (`title`=:title, `author_id`=:author_id, `descr`=:descr) WHERE `id`=:id;';
+    $sql= 'UPDATE `book` SET `title`=:title, `author_id`=:author_id, `descr`=:descr WHERE `id`=:id;';
+
     $query = $pdo->prepare($sql);
-    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->bindValue(':id', $id, PDO::PARAM_STR);
     $query->bindValue(':title', $title, PDO::PARAM_STR);
-    $query->bindValue(':author_id', $author_id, PDO::PARAM_INT);
+    $query->bindValue(':author_id', $authorsid, PDO::PARAM_INT);
     $query->bindValue(':descr', $descr, PDO::PARAM_STR);
     $query->execute();
 
@@ -43,6 +45,7 @@ if(!empty($_GET['id'])){
     $_SESSION['erreur'] = "URL Invalide";
     header('Location: index.php');
 }
+
 ?>
 
 <!doctype html>
@@ -87,7 +90,7 @@ if(!empty($_GET['id'])){
                         <input type="text" id="descr" name="descr" class="form-control" value="<?= $book['descr'] ?>">
                     </div>
                     <input type="hidden" value="<?= $book['id']?>" name="id">
-                    <button class="btn btn-primary">Envoyer</button><a href="index.php">   Retour</a>
+                    <button name="modify" type="submit" class="btn btn-primary">Envoyer</button><a href="index.php">   Retour</a>
                 </form>
             </section>
         </div>

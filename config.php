@@ -7,6 +7,6 @@ try{
     die(); 
 }
 $booksQuery = $pdo->query("SELECT book.*, author.fullname FROM book LEFT JOIN author ON author.id=book.author_id");
-$authors = $booksQuery->fetchAll(PDO::FETCH_ASSOC);
+$books = $booksQuery->fetchAll(PDO::FETCH_ASSOC);
 $authorsQuery = $pdo->query("SELECT * FROM author");
 $authors = $authorsQuery->fetchAll(PDO::FETCH_ASSOC);

@@ -6,15 +6,14 @@ if($_POST){
     if(!empty($_POST['title']) && !empty($_POST['author_id'])){
 
     $title = strip_tags($_POST['title']);
-    $sel_authors = strip_tags($_POST['author_id']);
+    $authorsid = strip_tags($_POST['author_id']);
     $descr = strip_tags($_POST['descr']);
 
     $sql= "INSERT INTO book(`title`, `author_id`, `descr`) VALUES (:title, :author_id, :descr);";
 
     $query = $pdo->prepare($sql);
-
     $query->bindValue(':title', $title, PDO::PARAM_STR);
-    $query->bindValue(':author_id', $authors, PDO::PARAM_INT);
+    $query->bindValue(':author_id', $authorsid, PDO::PARAM_INT);
     $query->bindValue(':descr', $descr, PDO::PARAM_STR);
     $query->execute();
 
