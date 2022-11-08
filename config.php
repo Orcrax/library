@@ -1,6 +1,6 @@
 <?php
 try{
-    $pdo = new \PDO('mysql:host=localhost;dbname=library', 'root', 'Al8rg976431582');
+    $pdo = new \PDO('mysql:host=localhost;dbname=library', 'root', '********');
     $pdo->exec('SET NAMES "UTF8"');
 } catch (PDOException $e){
     echo 'Erreur : '. $e->getMessage();
