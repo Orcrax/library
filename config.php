@@ -7,8 +7,8 @@ try{
     die(); 
 }
 
-$booksQuery = $pdo->query("SELECT book.*, author.fullname FROM book LEFT JOIN author ON author.id=book.author_id");
+$booksQuery = $pdo->query("SELECT book.*, author.fullname FROM book LEFT JOIN author ON author.id=book.author_id ORDER BY author.id");
 $books = $booksQuery->fetchAll(PDO::FETCH_ASSOC);
 $authorsQuery = $pdo->query("SELECT * FROM author");
 $authors = $authorsQuery->fetchAll(PDO::FETCH_ASSOC);
-$searchinbooks = $pdo->query("SELECT book.*, author.fullname FROM book LEFT JOIN author ON author.id=book.author_id");
+$searchinbooks = $pdo->query("SELECT book.*, author.fullname FROM book LEFT JOIN author ON author.id=book.author_id ORDER BY author.id");

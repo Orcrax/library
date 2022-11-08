@@ -7,9 +7,14 @@ $query->execute();
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
 /* ############SEARCHBAR############ */
-if(isset($_GET['searchbar']) && !empty($_GET['searchbar'])){
-    $search = htmlspecialchars($_GET['searchbar']);
+
+if(isset($_GET['searchbarbooks']) && !empty($_GET['searchbarbooks'])){
+    $search = htmlspecialchars($_GET['searchbarbooks']);
     $searchinbooks = $pdo->query('SELECT book.*, author.fullname FROM book LEFT JOIN author ON author.id=book.author_id WHERE book.title LIKE "%'.$search.'%" OR author.fullname LIKE "%'.$search.'%" ORDER BY id');
+}
+if(isset($_GET['searchbarauthors']) && !empty($_GET['searchbarauthors'])){
+    $search = htmlspecialchars($_GET['searchbarauthors']);
+    $searchinbooks = $pdo->query('SELECT book.*, author.fullname FROM book LEFT JOIN author ON author.id=book.author_id WHERE author.id LIKE "%'.$search.'%"');
 }
 /* ############SEARCHBAR############ */
 ?>
@@ -40,8 +45,24 @@ if(isset($_GET['searchbar']) && !empty($_GET['searchbar'])){
                 <div class="form">
                     <i class="fa fa-search"></i>
                     <form method="GET">
-                        <input type="search" name="searchbar" placeholder="Rechercher un livre ou un auteur..." class="form-control form-input">
+
+                        <label for="book">Recherche par titre de livre</label>
+                        <input type="search" name="searchbarbooks" placeholder="Rechercher un livre ou un auteur..." class="form-control form-input">
+                        <input class="btn btn-primary" type="submit" name="Rechercher"><br>
+                        </form>
+
+                        <form method="GET">
+
+                        <label for="author">Recherche par auteur</label>
+                        <select name="searchbarauthors" id="author" name="author_id" class="form-control">
+                                <?php foreach ($authors as $author) {
+                                    echo '<option value="' . $author['id'] . '">' . $author['fullname'] . '</option>';
+                                }
+                                ?>
+                        </select>             
+                    
                         <input class="btn btn-primary" type="submit" name="Rechercher">
+                        
                     </form>
                 </div>
     <!-- ################################################## -->
@@ -68,7 +89,7 @@ if(isset($_GET['searchbar']) && !empty($_GET['searchbar'])){
 
         }else{
             ?>
-            <p>Aucun livre trouvé</p>
+            <p>Aucun livre ou auteur trouvé</p>
             <?php
             }
         ?>
