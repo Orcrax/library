@@ -41,14 +41,14 @@ if(isset($_GET['searchbarauthors']) && !empty($_GET['searchbarauthors'])){
                         $_SESSION['erreur'] = "";
                     }
                 ?>                
-                <h1>Bibliothèque</h1>
+                <h1 style="margin-left:10em;margin-top:1,5em;color:#007BFF;text-decoration:underline;">Bibliothèque</h1>
                 <div class="form">
                     <i class="fa fa-search"></i>
                     <form method="GET">
 
                         <label for="book">Recherche par titre de livre</label>
-                        <input type="search" name="searchbarbooks" placeholder="Rechercher un livre ou un auteur..." class="form-control form-input">
-                        <input class="btn btn-primary" type="submit" name="Rechercher"><br>
+                        <input type="search" name="searchbarbooks" placeholder="Rechercher un livre" class="form-control form-input">
+                        <button style="float:right;" class="btn btn-primary" type="submit" name="Rechercher">Rechercher</button><br>
                         </form>
 
                         <form method="GET">
@@ -61,42 +61,40 @@ if(isset($_GET['searchbarauthors']) && !empty($_GET['searchbarauthors'])){
                                 ?>
                         </select>             
                     
-                        <input class="btn btn-primary" type="submit" name="Rechercher">
+                        <button style="float:right;" class="btn btn-primary" type="submit" name="Rechercher">Rechercher</button>
                         
                     </form>
                 </div>
     <!-- ################################################## -->
 
-    <section class="search_results">
-    <table class="table">
-        <thead>
-            <th>Titre</th>
-            <th>Auteur</th>
-            <th></th>
-        </thead>
-        <?php
-            if($searchinbooks->rowCount() > 0){
-                while($book = $searchinbooks->fetch()){
-                    ?>                                       
-                    <tbody>
-                    <tr>
-                        <td><?= $book['title'] ?></td>
-                        <td><?= $book['fullname'] ?></td>
-                        <td><a href="detail.php?id=<?= $book['id']?>">Détails</a>  <a href="edit.php?id=<?= $book['id']?>">Edit</a>
-                        <a href="erase.php?id=<?= $book['id']?>">Supprimer</a></td>
-        <?php 
-        }
-
-        }else{
-            ?>
-            <p>Aucun livre ou auteur trouvé</p>
+    <section style="margin-left:5em;" class="search_results">
+        <table class="table">
+            <thead>
+                <th style="color:#007BFF; text-decoration:underline; font-weight:bold; font-size:1.3em;">Titre</th>
+                <th style="color:#007BFF; text-decoration:underline; font-weight:bold; font-size:1.3em;">Auteur</th>
+            </thead>
             <?php
-            }
-        ?>
+                if($searchinbooks->rowCount() > 0){
+                    while($book = $searchinbooks->fetch()){
+                        ?>                                       
+                        <tbody>
+                        <tr>
+                            <td><?= $book['title'] ?></td>
+                            <td><?= $book['fullname'] ?></td>
+                            <td><a class="btn btn-outline-info" href="detail.php?id=<?= $book['id']?>">Détails</a>  <a class="btn btn-outline-warning" href="edit.php?id=<?= $book['id']?>">Edit</a>
+                            <a class="btn btn-outline-danger" href="erase.php?id=<?= $book['id']?>">Supprimer</a></td>
+                            <?php 
+                                }
+                                }else{
+                            ?>
+                            <p style="color:red; text-align:center; text-decoration:underline; font-weight:bold;font-size:2em;">Aucun livre ou auteur trouvé</p>
+                            <?php
+                                }
+                            ?>
         </table>
     </section>
 
-              <a class="btn btn-primary" href="add.php">Ajouter un livre</a>
+              <a style="width:100%;" class="btn btn-primary" href="add.php">Ajouter un livre</a>
             </section>
         </div>
     </main>

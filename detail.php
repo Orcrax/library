@@ -37,7 +37,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
                 <p>Titre : <?= $book['title']?></p>
                 <p>Auteur : <?= $book['fullname']?></p>
                 <p>Informations du livre : <?= $book['descr']?></p>
-                <p><a href="index.php">Retour</a> <a href="edit.php?id=<?= $book['id'] ?>">Modifier</a></p>
+                <p><a class="btn btn-secondary btn-sm" href="index.php">Retour</a>    <a class="btn btn-outline-warning" href="edit.php?id=<?= $book['id'] ?>">Modifier</a>                <a class="btn btn-outline-danger" href="erase.php?id=<?= $book['id']?>">Supprimer</a></p>
             </section>
         </div>
     </main>
