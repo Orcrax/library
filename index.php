@@ -9,11 +9,11 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
 /* ############SEARCHBAR############ */
 
 if(isset($_GET['searchbarbooks']) && !empty($_GET['searchbarbooks'])){
-    $search = htmlspecialchars($_GET['searchbarbooks']);
-    $searchinbooks = $pdo->query('SELECT book.*, author.fullname FROM book LEFT JOIN author ON author.id=book.author_id WHERE book.title LIKE "%'.$search.'%" OR author.fullname LIKE "%'.$search.'%" ORDER BY id');
+    $search = strip_tags(addslashes($_GET['searchbarbooks']));
+    $searchinbooks = $pdo->query('SELECT book.* FROM book LEFT JOIN author ON author.id=book.author_id WHERE book.title LIKE "%'.$search.'%" ORDER BY id');
 }
 if(isset($_GET['searchbarauthors']) && !empty($_GET['searchbarauthors'])){
-    $search = htmlspecialchars($_GET['searchbarauthors']);
+    $search = strip_tags(htmlspecialchars($_GET['searchbarauthors']));
     $searchinbooks = $pdo->query('SELECT book.*, author.fullname FROM book LEFT JOIN author ON author.id=book.author_id WHERE author.id LIKE "%'.$search.'%"');
 }
 /* ############SEARCHBAR############ */
@@ -23,7 +23,7 @@ if(isset($_GET['searchbarauthors']) && !empty($_GET['searchbarauthors'])){
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Ma Biblio</title>
+  <title>L'Île Lettrée</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -41,7 +41,7 @@ if(isset($_GET['searchbarauthors']) && !empty($_GET['searchbarauthors'])){
                         $_SESSION['erreur'] = "";
                     }
                 ?>                
-                <h1 style="margin-left:10em;margin-top:1,5em;color:#007BFF;text-decoration:underline;">Bibliothèque</h1>
+                <h1 style="margin-left:10em;margin-top:1,5em;color:#007BFF;text-decoration:underline;">L'Île Lettrée</h1>
                 <div class="form">
                     <i class="fa fa-search"></i>
                     <form method="GET">
